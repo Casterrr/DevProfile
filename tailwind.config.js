@@ -21,6 +21,10 @@ module.exports = {
         'gray800': '#29292e',
       }
     },
+    fontFamily: {
+      'Roboto-regular': ['Roboto_400Regular'],
+      'Roboto-bold': ['Roboto_700Bold'],
+    }
   },
   plugins: [],
 }
