@@ -22,8 +22,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      'Roboto-regular': ['Roboto_400Regular'],
-      'Roboto-bold': ['Roboto_700Bold'],
+      robotoRegular: ["Roboto_400Regular"],
+      robotoBold: ["Roboto_700Bold"]
     }
   },
   plugins: [],
