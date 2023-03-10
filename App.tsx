@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { Home } from './src/screens/home';
+// import { Home } from './src/screens/home';
 
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'
 
 import * as SplashScreen from 'expo-splash-screen';
+import { SignIn } from './src/screens/signIn';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,7 +27,8 @@ export default function App() {
 
   return (
     <SafeAreaView className="flex-1">
-      <Home />
+      {/* <Home /> */}
+      <SignIn />
       <StatusBar style='light' translucent={false} ></StatusBar>
     </SafeAreaView>
   );
