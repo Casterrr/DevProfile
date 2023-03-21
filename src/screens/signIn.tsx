@@ -10,7 +10,7 @@ import logo from '../assets/logo.png';
 export function SignIn() {
   return (
     <>
-      <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ flex: 1 }}>
+      <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-1 bg-dark">
       
           <View className="flex-1 items-center justify-center w-max p-6">
@@ -30,8 +30,8 @@ export function SignIn() {
         </View>
       </ScrollView>
     
-      <TouchableOpacity className='absolute left-0 top-0 bg-gray800 border-t-2 border-black flex-row py-4 items-center justify-center mt-6'>
-        <Feather name='log-out' size={28} color={'#eba417'} />
+      <TouchableOpacity className='absolute left-0 right-0 bottom-0 bg-gray800 border-t-2 border-black flex-row py-4 items-center justify-center mt-6'>
+        <Feather name='log-in' size={28} color={'#eba417'} />
         <Text className='font-robotoRegular text-lg ml-4 text-primary'>Criar uma conta</Text>
       </TouchableOpacity>
 
