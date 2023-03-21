@@ -3,12 +3,13 @@ import { Text, View, TouchableOpacity, Image, TouchableOpacityProps } from 'reac
 
 interface ButtonProps extends TouchableOpacityProps {
     title: string;
+    titleStyles: string;
 }
 
-export const Button: React.FunctionComponent<ButtonProps> = ({ title, ...otherProps }) => {
+export const Button: React.FunctionComponent<ButtonProps> = ({ title, titleStyles, ...otherProps }) => {
   return (
     <TouchableOpacity {...otherProps} className="w-max items-center bg-primary p-5 mt-4">
-        <Text className="font-robotoBold text-sm text-dark" > {title} </Text>
+        <Text className={`font-robotoBold text-sm ${titleStyles}`} > {title} </Text>
     </TouchableOpacity>
   );
 }
