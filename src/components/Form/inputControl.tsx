@@ -30,7 +30,7 @@ export const InputControl: React.FunctionComponent<Props> = ({
             name={name}
         />
         
-        {error && <Text className='font-robotoRegular text-sm text-danger mb-4'>Este campo é obrigatório.</Text>}
+        {error && <Text className='font-robotoRegular text-sm text-danger mb-4'>{error}</Text>}
 
     </View>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Image, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
-import { Input } from '../components/Form/input';
 import { Button } from '../components/Form/button';
 
 import { Feather } from '@expo/vector-icons'
@@ -15,18 +16,22 @@ interface ScreenNavigationProp {
 	goBack: () => void;
 }
 
-interface IFormInputs {
-	[name: string]: any;
-	// email: string;
-	// password: string;
-}
+const formSchema = yup.object({
+	name: yup.string().required('Informe o seu nome completo.'),
+	email: yup.string().email('Email inválido').required('Informe o email.'),
+	password: yup.string().required('Informe a senha.')
+})
+
+type FormData = yup.InferType<typeof formSchema>;
 
 export function SignUp() {
-	const { handleSubmit, control } = useForm<FieldValues>();
+	const { handleSubmit, control, formState: { errors }  } = useForm<FormData>({
+		resolver: yupResolver(formSchema)
+	});
 
 	const { goBack } =  useNavigation<ScreenNavigationProp>();
 
-	const handleSignUp = (form: IFormInputs) => {
+	const handleSignUp = (form: FormData) => {
 			const data = {
 				name: form.name,
 				email: form.email,
@@ -54,6 +59,7 @@ export function SignUp() {
 							name='name' 
 							placeholder = 'Nome' 
 							className="w-full mb-4 rounded-md px-4 py-5 bg-gray800 text-light"
+							error={errors.name && errors.name.message}
 						/>
 						
 						<InputControl 
@@ -64,6 +70,7 @@ export function SignUp() {
 							placeholder="Email" 
 							keyboardType='email-address'
 							className="w-full mb-4 rounded-md px-4 py-5 bg-gray800 text-light"
+							error={errors.email && errors.email.message}
 						/>
 						
 						<InputControl 
@@ -72,10 +79,11 @@ export function SignUp() {
 							placeholder = 'Senha' 
 							autoCorrect={false}
 							secureTextEntry
-							className="w-full rounded-md px-4 py-5 bg-gray800 text-light"
+							className="w-full mb-4 rounded-md px-4 py-5 bg-gray800 text-light"
+							error={errors.password && errors.password.message}
 						/>
 
-						<Button titleStyles='' title={'Criar'} onPress={handleSubmit(handleSignUp)} className="w-full mt-6 rounded-md"/>
+						<Button titleStyles='' title={'Criar'} onPress={handleSubmit(handleSignUp)} className="w-full rounded-md"/>
 
 					</View>
 

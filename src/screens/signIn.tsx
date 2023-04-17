@@ -70,7 +70,7 @@ export function SignIn() {
 				control={control} 
 				name="password" 
 				placeholder = "Senha" 
-				className="rounded-md px-4 py-5 bg-gray800 text-light"
+				className="mb-4 rounded-md px-4 py-5 bg-gray800 text-light"
 				secureTextEntry
 				error={errors.password && errors.password.message}
 			/>
