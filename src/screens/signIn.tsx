@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image, ScrollView, Text, View, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 // import { Input } from '../components/Form/input';
 import { Button } from '../components/Form/button';
@@ -16,18 +18,21 @@ interface ScreenNavigationProp {
   navigate: (screen: string) => void;
 }
 
-interface IFormInputs {
-	[name: string]: any;
-	// email: string;
-	// password: string;
-}
+const formSchema = yup.object({
+	email: yup.string().email('Email inválido').required('Informe o email.'),
+	password: yup.string().required('Informe a senha.')
+})
+
+type FormData = yup.InferType<typeof formSchema>;
 
 export function SignIn() {
-	const { handleSubmit, control } = useForm<FieldValues>();
+	const { handleSubmit, control, formState: { errors } } = useForm<FormData>({
+		resolver: yupResolver(formSchema)
+	});
 
 	const navigation =  useNavigation<ScreenNavigationProp>();
 
-	const handleSignIn = (form: IFormInputs) => {
+	const handleSignIn = (form: FormData) => {
 		const data = {
 			email: form.email,
 			password: form.password,
@@ -55,7 +60,8 @@ export function SignIn() {
 				name="email" 
 				placeholder="Email" 
 				className="mb-4 rounded-md px-4 py-5 bg-gray800 text-light"
-				keyboardType='email-address'
+				keyboardType="email-address"
+				error={errors.email && errors.email.message}
 			/>
 
 			<InputControl 
@@ -66,6 +72,7 @@ export function SignIn() {
 				placeholder = "Senha" 
 				className="rounded-md px-4 py-5 bg-gray800 text-light"
 				secureTextEntry
+				error={errors.password && errors.password.message}
 			/>
 		
 			<Button title={"Entrar"} titleStyles={""} onPress={handleSubmit(handleSignIn)} className="w-full mt-6 text-dark rounded-md"/>

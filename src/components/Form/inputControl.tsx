@@ -1,17 +1,20 @@
 import React from 'react';
-import { View, TextInputProps } from 'react-native';
+import { Text, View, TextInputProps } from 'react-native';
 
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, FieldErrors, FieldValues, FieldError } from 'react-hook-form'
 import { Input } from './input';
 
 interface Props extends TextInputProps {
     control: Control;
     name: string;
+    error: string | undefined;
+    // error: FieldError | string | FieldErrors<FieldValues> | undefined;
 }
 
 export const InputControl: React.FunctionComponent<Props> = ({
     control,
     name,
+    error,
     ...otherProps
 }) => {
   return (
@@ -26,6 +29,9 @@ export const InputControl: React.FunctionComponent<Props> = ({
             )}
             name={name}
         />
+        
+        {error && <Text className='font-robotoRegular text-sm text-danger mb-4'>Este campo é obrigatório.</Text>}
+
     </View>
   );
 }
