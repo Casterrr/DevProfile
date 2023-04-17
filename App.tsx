@@ -8,7 +8,6 @@ import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/
 
 import * as SplashScreen from 'expo-splash-screen';
 import { Routes } from './src/routes';
-import { SignIn } from './src/screens/signIn';
 
 SplashScreen.preventAutoHideAsync();
 
